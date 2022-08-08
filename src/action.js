@@ -25,6 +25,9 @@ const pushEventHasOnlyOneCommit = (from) => {
 const getRangeForPushEvent = () => {
   let from = eventContext.payload.before
   const to = GITHUB_SHA
+  console.info('getRangeForPushEvent info from', from, " to", to)
+  console.warn('getRangeForPushEvent warn from', from, " to", to)
+
 
   if (eventContext.payload.forced) {
     // When a commit is forced, "before" field from the push event data may point to a commit that doesn't exist
@@ -119,6 +122,11 @@ const handleOnlyWarnings = (formattedResults) => {
 
 const showLintResults = async ([from, to]) => {
   const commits = await getHistoryCommits(from, to)
+  console.warn("showLintResults commits", commits)
+  commits.array.forEach(element => {
+    console.warn("showLintResults element", element)
+  });
+
   const config = existsSync(configPath)
     ? await load({}, { file: configPath })
     : await load({ extends: ['@commitlint/config-conventional'] })
