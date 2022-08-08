@@ -8,6 +8,7 @@ import load from '@commitlint/load'
 import gitCommits from './gitCommits'
 import generateOutputs from './generateOutputs'
 
+const core = require('@actions/core');
 const pullRequestEvent = 'pull_request'
 const pullRequestTargetEvent = 'pull_request_target'
 const pullRequestEvents = [pullRequestEvent, pullRequestTargetEvent]
@@ -25,14 +26,14 @@ const pushEventHasOnlyOneCommit = (from) => {
 const getRangeForPushEvent = () => {
   let from = eventContext.payload.before
   const to = GITHUB_SHA
-  info('getRangeForPushEvent info from', from, " to", to)
-  warn('getRangeForPushEvent warn from', from, " to", to)
+  core.info('getRangeForPushEvent info from', from, " to", to)
+  core.warn('getRangeForPushEvent warn from', from, " to", to)
 
 
   if (eventContext.payload.forced) {
     // When a commit is forced, "before" field from the push event data may point to a commit that doesn't exist
     console.warn(
-      'Commit was forced, checking only the latest commit from push instead of a range of commit messages',
+      'Lx Commit was forced, checking only the latest commit from push instead of a range of commit messages',
     )
     from = null
   }
