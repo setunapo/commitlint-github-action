@@ -16,11 +16,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wagoid/commitlint-github-action.git"
+    "url": "git+https://github.com/setunapo/commitlint-github-action.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://github.com/wagoid/commitlint-github-action",
+  "homepage": "https://github.com/setunapo/commitlint-github-action",
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@actions/github": "^5.0.3",

@@ -1,6 +1,6 @@
 import { existsSync } from 'fs'
 import { resolve } from 'path'
-import { getInput, setFailed, info, warn } from '@actions/core'
+import { getInput, setFailed } from '@actions/core'
 import { context as eventContext, getOctokit } from '@actions/github'
 import lint from '@commitlint/lint'
 import { format } from '@commitlint/format'
@@ -8,7 +8,7 @@ import load from '@commitlint/load'
 import gitCommits from './gitCommits'
 import generateOutputs from './generateOutputs'
 
-const core = require('@actions/core');
+// const core = require('@actions/core');
 const pullRequestEvent = 'pull_request'
 const pullRequestTargetEvent = 'pull_request_target'
 const pullRequestEvents = [pullRequestEvent, pullRequestTargetEvent]
@@ -26,8 +26,8 @@ const pushEventHasOnlyOneCommit = (from) => {
 const getRangeForPushEvent = () => {
   let from = eventContext.payload.before
   const to = GITHUB_SHA
-  core.info('getRangeForPushEvent info from', from, " to", to)
-  core.warn('getRangeForPushEvent warn from', from, " to", to)
+  console.info('getRangeForPushEvent info from', from, " to", to)
+  console.warn('getRangeForPushEvent warn from', from, " to", to)
 
 
   if (eventContext.payload.forced) {
@@ -123,7 +123,7 @@ const handleOnlyWarnings = (formattedResults) => {
 
 const showLintResults = async ([from, to]) => {
   const commits = await getHistoryCommits(from, to)
-  warn("showLintResults commits", commits)
+  console.warn("showLintResults commits", commits)
   commits.array.forEach(element => {
     console.warn("showLintResults element", element)
   });
